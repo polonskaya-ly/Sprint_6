@@ -1,15 +1,9 @@
 from selenium.webdriver.common.by import By
 import allure
+from ..locators import RentPageLocators
 
 
 class RentPage:
-    delivery_date_field = [By.XPATH, './/input[@placeholder= "* Когда привезти самокат"]']
-    rent_period_field = [By.CLASS_NAME, 'Dropdown-root']
-    create_order_button = [By.XPATH, './/button[contains(@class,"Button_Middle__1CSJM") and text() = "Заказать"]']
-    confirm_button = [By.XPATH, './/button[contains(@class,"Button_Middle__1CSJM") and text() = "Да"]']
-    status_button = [By.XPATH, './/button[contains(text(),"Посмотреть статус")]']
-    order_success_modal = [By.XPATH, './/div[text() = "Заказ оформлен"]']
-
     def __init__(self, driver):
         self.driver = driver
 
@@ -22,19 +16,19 @@ class RentPage:
         return element
 
     def click_delivery_date_field(self):
-        self.driver.find_element(*self.delivery_date_field).click()
+        self.driver.find_element(*RentPageLocators.DELIVERY_DATE_FIELD).click()
 
     def click_delivery_date(self, random_day):
         self.day(random_day).click()
 
     def click_rent_period_field(self):
-        self.driver.find_element(*self.rent_period_field).click()
+        self.driver.find_element(*RentPageLocators.RENT_PERIOD_FIELD).click()
 
     def click_period(self, random_period):
         self.period(random_period).click()
 
     def click_create_order_button(self):
-        self.driver.find_element(*self.create_order_button).click()
+        self.driver.find_element(*RentPageLocators.CREATE_ORDER_BUTTON).click()
 
     @allure.step('Заполнить условия аренды')
     def fill_rent_terms(self, random_period, random_day):
@@ -46,15 +40,11 @@ class RentPage:
 
     @allure.step('Подтвердить заказ')
     def click_confirm_create_order(self):
-        self.driver.find_element(*self.confirm_button).click()
+        self.driver.find_element(*RentPageLocators.CONFIRM_BUTTON).click()
 
     def check_success_order_message(self):
-        assert self.driver.find_element(*self.order_success_modal).is_displayed()
+        assert self.driver.find_element(*RentPageLocators.ORDER_SUCCESS_MODAL).is_displayed()
 
     @allure.step('Перейти на страницу с трекером заказа')
     def click_status_button(self):
-        self.driver.find_element(*self.status_button).click()
-
-
-
-
+        self.driver.find_element(*RentPageLocators.STATUS_BUTTON).click()

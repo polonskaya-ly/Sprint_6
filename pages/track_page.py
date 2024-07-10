@@ -1,24 +1,20 @@
 import time
 import allure
-
-from selenium.webdriver.common.by import By
 from ..url_config import UrlConfig
+from ..locators import TrackPageLocators
 
 
 class TrackPage:
-    logo_button = [By.CLASS_NAME, 'Header_LogoScooter__3lsAR']
-    yandex_button = [By.CLASS_NAME, 'Header_LogoYandex__3TSOI']
-
     def __init__(self, driver):
         self.driver = driver
 
     @allure.step('Нажать на лого Самоката')
     def click_logo_button(self):
-        self.driver.find_element(*self.logo_button).click()
+        self.driver.find_element(*TrackPageLocators.LOGO_BUTTON).click()
 
     @allure.step('Нажать на лого Яндекса')
     def click_yandex_button(self):
-        self.driver.find_element(*self.yandex_button).click()
+        self.driver.find_element(*TrackPageLocators.YANDEX_BUTTON).click()
         time.sleep(2)
 
     def check_move_to_home_page(self):

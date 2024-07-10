@@ -1,7 +1,8 @@
 import pytest
 from selenium import webdriver
 import random
-from .constraints import Constraints
+
+from .constants import Constants
 from .url_config import UrlConfig
 
 
@@ -12,7 +13,7 @@ def driver(request):
     driver.get(UrlConfig.domain)
     request.cls.driver = driver
     yield driver
-    driver.close()
+    driver.quit()
 
 
 @pytest.fixture
@@ -33,20 +34,20 @@ def rent_name():
 
 @pytest.fixture
 def random_metro():
-    metro_stations = Constraints.metro_stations
+    metro_stations = Constants.metro_stations
     random_metro = random.choice(metro_stations)
     return random_metro
 
 
 @pytest.fixture
 def random_period():
-    periods = Constraints.periods
+    periods = Constants.periods
     random_period = random.choice(periods)
     return  random_period
 
 
 @pytest.fixture
 def random_day():
-    days = Constraints.days
+    days = Constants.days
     random_day = random.choice(days)
     return  random_day

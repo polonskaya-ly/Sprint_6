@@ -1,6 +1,5 @@
 import allure
 import pytest
-
 from ..pages.yandex_page import YandexPage
 from ..pages.track_page import TrackPage
 from ..pages.rent_page import RentPage
@@ -10,8 +9,6 @@ from ..pages.order_page import OrderPage
 
 @pytest.mark.usefixtures("driver")
 class TestCreateOrder:
-
-    driver = None
 
     @allure.title("Создание заказа через хейдер")
     def test_create_order_through_small_order_button(self, rent_name, rent_data, random_metro, random_period, random_day):
@@ -43,4 +40,4 @@ class TestCreateOrder:
           track_page.click_yandex_button()
           track_page.move_to_another_window()
           yandex_page = YandexPage(self.driver)
-          yandex_page.check_dzen_page_url()
+          yandex_page.check_yandex_page_url()

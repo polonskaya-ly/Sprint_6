@@ -1,22 +1,19 @@
 import pytest
 import allure
-from ..constraints import Constraints
+from ..constants import Constants
 from ..pages.home_page import HomePage
 
 
 @pytest.mark.usefixtures("driver")
 class TestCheckAnswers:
-
-    driver = None
-
-    @pytest.mark.parametrize('question, answer', [(Constraints.questions[0], Constraints.answers[0]),
-                                                  (Constraints.questions[1], Constraints.answers[1]),
-                                                  (Constraints.questions[2], Constraints.answers[2]),
-                                                  (Constraints.questions[3], Constraints.answers[3]),
-                                                  (Constraints.questions[4], Constraints.answers[4]),
-                                                  (Constraints.questions[5], Constraints.answers[5]),
-                                                  (Constraints.questions[6], Constraints.answers[6]),
-                                                (Constraints.questions[7], Constraints.answers[7])])
+    @pytest.mark.parametrize('question, answer', [(Constants.questions[0], Constants.answers[0]),
+                                                  (Constants.questions[1], Constants.answers[1]),
+                                                  (Constants.questions[2], Constants.answers[2]),
+                                                  (Constants.questions[3], Constants.answers[3]),
+                                                  (Constants.questions[4], Constants.answers[4]),
+                                                  (Constants.questions[5], Constants.answers[5]),
+                                                  (Constants.questions[6], Constants.answers[6]),
+                                                (Constants.questions[7], Constants.answers[7])])
     @allure.title("Соотвествие вопроса и ответа")
     def test_check_answers(self, question, answer):
         home_page = HomePage(self.driver)

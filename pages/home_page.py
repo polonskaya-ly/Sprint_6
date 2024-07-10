@@ -1,25 +1,35 @@
-import time
 import allure
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
+from ..locators import HomePageLocators
 
 
 class HomePage:
-    order_button_small = [By.XPATH, './/button[@class = "Button_Button__ra12g" and text() = "Заказать"]']
-    order_button_big = [By.XPATH, './/button[contains(@class,"Button_Middle__1CSJM") and text() = "Заказать"]']
-
     def __init__(self, driver):
         self.driver = driver
 
+    def question_locator(self, question):
+        question_locator = [By.XPATH, f'.//div[text() = "{question}"]']
+        return question_locator
+
     def element_question(self, question):
-        element = self.driver.find_element(By.XPATH, f'.//div[text() = "{question}"]')
+        element = self.driver.find_element(*self.question_locator(question))
         return  element
 
     @allure.step('Перейти к форме заказа через кнопку в хейдере')
     def click_order_button_small(self):
-        self.driver.find_element(*self.order_button_small).click()
+        self.driver.find_element(*HomePageLocators.ORDER_BUTTON_SMALL).click()
 
+    @allure.step('Перейти к форме заказа')
     def click_order_button_big(self):
-        self.driver.find_element(*self.order_button_big).click()
+        WebDriverWait(self.driver, 3).until(
+            expected_conditions.element_to_be_clickable((HomePageLocators.ORDER_BUTTON_BIG)))
+        self.driver.find_element(*HomePageLocators.ORDER_BUTTON_BIG).click()
+
+    def wait_for_clickable_question(self, question):
+        WebDriverWait(self.driver, 3).until(
+            expected_conditions.element_to_be_clickable((self.question_locator(question))))
 
     @allure.step('Проскроллить до "Вопросы о важном"')
     def scroll_to_question(self, question):
@@ -28,13 +38,12 @@ class HomePage:
 
     @allure.step('Проскроллить до большой кнопки заказа')
     def scroll_to_order_button_big(self):
-        element = self.driver.find_element(*self.order_button_big)
+        element = self.driver.find_element(*HomePageLocators.ORDER_BUTTON_BIG)
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
-        time.sleep(1)
 
     @allure.step('Нажать на вопрос')
     def click_question(self, question):
-        time.sleep(1)
+        self.wait_for_clickable_question(question)
         element = self.element_question(question)
         element.click()
 
