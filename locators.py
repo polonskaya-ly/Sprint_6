@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 
 
 class HomePageLocators:
-    ORDER_BUTTON_SMALL = [By.CLASS_NAME, 'Button_Button__ra12g']
+    ORDER_BUTTON_SMALL = [By.XPATH, './/button[contains(@class,"Button_Button")]']
     ORDER_BUTTON_BIG = [By.XPATH, './/div[contains(@class,"Home_FinishButton")]/button[text() = "Заказать"]']
 
 
@@ -14,6 +14,7 @@ class OrderPageLocators:
     PHONE_FIELD = [By.XPATH, './/input[@placeholder= "* Телефон: на него позвонит курьер"]']
     THEN_BUTTON = [By.XPATH, './/button[contains(text(),"Далее")]']
 
+
 class RentPageLocators:
     DELIVERY_DATE_FIELD = [By.XPATH, './/input[@placeholder= "* Когда привезти самокат"]']
     RENT_PERIOD_FIELD = [By.CLASS_NAME, 'Dropdown-root']
@@ -21,6 +22,7 @@ class RentPageLocators:
     CONFIRM_BUTTON = [By.XPATH, './/button[contains(@class,"Button_Middle__1CSJM") and text() = "Да"]']
     STATUS_BUTTON = [By.XPATH, './/button[contains(text(),"Посмотреть статус")]']
     ORDER_SUCCESS_MODAL = [By.XPATH, './/div[text() = "Заказ оформлен"]']
+
 
 class TrackPageLocators:
     LOGO_BUTTON = [By.CLASS_NAME, 'Header_LogoScooter__3lsAR']
