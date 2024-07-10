@@ -19,7 +19,7 @@ class RentPageLocators:
     DELIVERY_DATE_FIELD = [By.XPATH, './/input[@placeholder= "* Когда привезти самокат"]']
     RENT_PERIOD_FIELD = [By.CLASS_NAME, 'Dropdown-root']
     CREATE_ORDER_BUTTON = [By.XPATH, './/button[contains(@class,"Button_Middle__1CSJM") and text() = "Заказать"]']
-    CONFIRM_BUTTON = [By.XPATH, './/button[contains(@class,"Button_Middle__1CSJM") and text() = "Да"]']
+    CONFIRM_BUTTON = [By.XPATH, './/button[contains(@class,"Button_Middle") and text() = "Да"]']
     STATUS_BUTTON = [By.XPATH, './/button[contains(text(),"Посмотреть статус")]']
     ORDER_SUCCESS_MODAL = [By.XPATH, './/div[text() = "Заказ оформлен"]']
 
